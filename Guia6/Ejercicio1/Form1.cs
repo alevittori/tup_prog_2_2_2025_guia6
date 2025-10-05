@@ -21,7 +21,7 @@ namespace Ejercicio1
             lbPersonas.Items.Clear();
             foreach ( Persona p in personas)
             {
-                lbPersonas.Items.Add(p.Describir());
+                lbPersonas.Items.Add(p);
             }
         }
         public Form1()
@@ -81,6 +81,40 @@ namespace Ejercicio1
                 //preguntamos por la bandera -> si true volvemos a mostrar la ventana
                 if (volver) { VCargarPersona.ShowDialog(); }
             
+            }
+        }
+
+        private void btnEliminar_Click(object sender, EventArgs e)
+        {
+            Persona personABorrar = null;
+            try
+            {
+                personas.Sort();
+                personABorrar = lbPersonas.SelectedItem as Persona;
+                int idx = personas.BinarySearch(personABorrar);
+
+                if(idx >= 0)
+                {
+                    personABorrar = personas[idx];
+                }
+                else { MessageBox.Show("No se encontro la persona en la lista","Lo siento",MessageBoxButtons.OK, MessageBoxIcon.Information); return; }
+                    
+
+
+                if (personABorrar != null)
+                {
+                    personas.Remove(personABorrar);
+                    MessageBox.Show("Persona Borrada", "Exito!");
+                    ActualizarDAtos();
+                }
+                //else
+                //{
+                //    MessageBox.Show("Seleccione Persona a Borrar", "Atencion", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+               // }
+            }catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message,"Ups",MessageBoxButtons.OK, MessageBoxIcon.Error);
+
             }
         }
     }

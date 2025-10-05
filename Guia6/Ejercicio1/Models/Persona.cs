@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Ejercicio1.Models
 {
-    internal class Persona
+    internal class Persona:IComparable<Persona>
     {
         private string nombre;
 
@@ -37,10 +37,14 @@ namespace Ejercicio1.Models
         public int CompareTo(Persona other)
         {
             if (other != null)
-                return nombre.CompareTo(other.nombre);
+                return this.nombre.CompareTo(other.nombre);
             return -1;
         }
 
+        public override string ToString()
+        {
+            return Describir();
+        }
         virtual public string Describir()
         {
             return nombre;

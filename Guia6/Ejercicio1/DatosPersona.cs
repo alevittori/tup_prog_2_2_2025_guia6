@@ -15,6 +15,17 @@ namespace Ejercicio1
         public DatosPersona()
         {
             InitializeComponent();
+            rbFisica.Checked = true;
+        }
+
+        private void DatosPersona_Load(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void rbFisica_CheckedChanged(object sender, EventArgs e)
+        {
+            tbCUIT.Enabled = rbFisica.Checked == false;
         }
     }
 }
